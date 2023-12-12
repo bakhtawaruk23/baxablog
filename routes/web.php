@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('category')->group(function(){
+    Route::get('/json_index', [CategoryController::class, 'json_index']);
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::post('/store', [CategoryController::class, 'store']);
+    Route::get('/{slug}/edit', [CategoryController::class, 'edit']);
+    Route::post('/{slug}/update', [CategoryController::class, 'update']);
+    Route::delete('/{slug}/delete', [CategoryController::class, 'delete']);
+});
+
